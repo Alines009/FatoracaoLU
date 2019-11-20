@@ -87,10 +87,10 @@ print("Permutação das Linhas")
 imprimeVetor(vetorPermut) 
 
 print("Matriz L")
-imprimeMatriz(U)
+imprimeMatriz(L) 
 
 print("Matriz U")
-imprimeMatriz(L) 
+imprimeMatriz(U)
 
 print("----------------------------")
 
@@ -117,4 +117,4 @@ print("Valor do determinante")
 print(det)
 
 # Escreve a matriz em um arquivo texto
-writeFile(B)
+writeFile(B,det)

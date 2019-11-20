@@ -11,8 +11,8 @@ def readFile(): # Funcao que le matriz do arquivo
     return matriz, rows, columns # Retorna a matriz, numero de linhas e colunas
 
 
-# Escreve a matriz resultante no arquivo
-def writeFile(matriz):
+# Escreve a matriz resultante no arquivo e o determinante da matriz A
+def writeFile(matriz,det):
     arq = open('RESUL.txt', 'w')
 
     N = len(matriz)
@@ -23,5 +23,6 @@ def writeFile(matriz):
             x += "%10.5f" % (matriz[i][j])
         
         arq.write(x + "\n")
-    
+    arq.write("\n")
+    arq.write("Determinante da matriz A: "+ str(det))
     arq.close()
