@@ -39,6 +39,12 @@ def multiplicaMatrizes(A, B):
 
     return C
 
+#Calcula o determinante da matriz
+def calculaDeterminante(U,column):
+    det = 1.0
+    for i in range(column):
+        det = det * U[i][i]
+    return det
 
 # Imprime uma matriz
 def imprimeMatriz(A):
@@ -51,8 +57,12 @@ def imprimeMatriz(A):
         print(" ]")
     print()
 
+# Imprime um vetor
+def imprimeVetor(A):
+    print(A)
+    print()
 
-# Cálcula o vetor solução por retrosubstituição
+# Calcula o vetor solução por retrossubstituição
 # em uma matriz triangular superior
 def retrosubstituicaoSuperior(A, B):
     N = len(A)

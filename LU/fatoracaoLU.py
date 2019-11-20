@@ -3,17 +3,10 @@ from matriz import *
 
 # Funcao que troca as linhas da matriz
 def changeRows(matriz, i, j):
-    # for k in range(len(matriz)):
-    #     print(matriz[k])
     aux = matriz[i]
     matriz[i] = matriz[j]
     matriz[j] = aux
-    # print("--------------")
-    # for k in range(len(matriz)):
-    #     print(matriz[k])
-    # print("~~~~~~~~~~")
     return matriz
-
 
 # Calcula o valor absoluto
 def abs(x):
@@ -38,7 +31,7 @@ def pivoting(matriz, i):
             matriz[linha][i] = num / den
 
 
-def gauss(matriz, B):
+def gauss(matriz, B, vetorPermut):
     N = len(matriz)  # Ordem da Matriz
     
     L = matrizIdentidade(N)
@@ -55,6 +48,7 @@ def gauss(matriz, B):
                 pivo = matriz[j][i]
                 matriz = changeRows(matriz, i, j)
                 B = changeRows(B, i, j)
+                vetorPermut = changeRows(vetorPermut, i, j)
 
         pivoting(matriz, i)
 
@@ -64,10 +58,18 @@ def gauss(matriz, B):
             L[linha][coluna] = matriz[linha][coluna] # Matriz L
             matriz[linha][coluna] = 0                # Matriz U
 
-    return matriz, L, B
+    return matriz, L, B, vetorPermut
 
+def criarVetorPermutacao(columns): #Cria vetor que salva as permutações realizadas na matriz
+    vetorPermut = []
+    for i in range(columns):
+        vetorPermut.append(i)
+    return vetorPermut
 
 matriz, rows, columns = readFile()
+
+vetorPermut = []
+vetorPermut = criarVetorPermutacao(columns)
 
 # Matriz lida do arquivo texto
 print("\nMatriz A")
@@ -76,10 +78,13 @@ imprimeMatriz(matriz)
 # Matriz identidade que 
 B = matrizIdentidade(rows)
 
-# Matrizes L, U e B após a fatoração LU da matriz A
-U, L, B = gauss(matriz, B)
+# Vetor Permutação e Matrizes L, U e B após a fatoração LU da matriz A
+U, L, B, vetorPermut = gauss(matriz, B, vetorPermut)
 
 print("----------------------------\n")
+
+print("Permutação das Linhas")
+imprimeVetor(vetorPermut) 
 
 print("Matriz L")
 imprimeMatriz(U)
@@ -106,6 +111,10 @@ B = matrizInversa(L, U, B)
 
 print("Matriz Inversa de A")
 imprimeMatriz(B)
+
+det =  calculaDeterminante(U,columns)
+print("Valor do determinante")
+print(det)
 
 # Escreve a matriz em um arquivo texto
 writeFile(B)

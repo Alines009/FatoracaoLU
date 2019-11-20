@@ -1,5 +1,5 @@
 def readFile(): # Funcao que le matriz do arquivo
-    arq = open('SISTEMA.txt','r')
+    arq = open('LU/SISTEMA.txt','r')
     matriz = []
     texto = arq.readlines()
     rows, columns = 0, 0
