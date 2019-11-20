@@ -112,7 +112,11 @@ B = matrizInversa(L, U, B)
 print("Matriz Inversa de A")
 imprimeMatriz(B)
 
-det =  calculaDeterminante(U,columns)
+det = calculaDeterminante(U,columns)
+
+if ((len(vetorPermut)-1)%2)>0:
+    det=det*(-1)
+
 print("Valor do determinante")
 print(det)
 

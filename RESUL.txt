@@ -3,4 +3,4 @@
    0.48312   0.00931  -0.07567   0.11525
    0.18510   0.10477  -0.10128   0.04657
 
-Determinante da matriz A: -859.0
+Determinante da matriz A: 859.0
