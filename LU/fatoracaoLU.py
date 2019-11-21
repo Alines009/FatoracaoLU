@@ -31,7 +31,7 @@ def pivoting(matriz, i):
             matriz[linha][i] = num / den
 
 
-def gauss(matriz, B, vetorPermut):
+def gauss(matriz, B, vetorPermut, contadorPermut):
     N = len(matriz)  # Ordem da Matriz
     
     L = matrizIdentidade(N)
@@ -49,6 +49,7 @@ def gauss(matriz, B, vetorPermut):
                 matriz = changeRows(matriz, i, j)
                 B = changeRows(B, i, j)
                 vetorPermut = changeRows(vetorPermut, i, j)
+                contadorPermut = contadorPermut + 1
 
         pivoting(matriz, i)
 
@@ -58,7 +59,7 @@ def gauss(matriz, B, vetorPermut):
             L[linha][coluna] = matriz[linha][coluna] # Matriz L
             matriz[linha][coluna] = 0                # Matriz U
 
-    return matriz, L, B, vetorPermut
+    return matriz, L, B, vetorPermut, contadorPermut
 
 def criarVetorPermutacao(columns): #Cria vetor que salva as permutações realizadas na matriz
     vetorPermut = []
@@ -68,6 +69,7 @@ def criarVetorPermutacao(columns): #Cria vetor que salva as permutações realiz
 
 matriz, rows, columns = readFile()
 
+contadorPermut = 0
 vetorPermut = []
 vetorPermut = criarVetorPermutacao(columns)
 
@@ -79,7 +81,7 @@ imprimeMatriz(matriz)
 B = matrizIdentidade(rows)
 
 # Vetor Permutação e Matrizes L, U e B após a fatoração LU da matriz A
-U, L, B, vetorPermut = gauss(matriz, B, vetorPermut)
+U, L, B, vetorPermut, contadorPermut = gauss(matriz, B, vetorPermut, contadorPermut)
 
 print("----------------------------\n")
 
@@ -114,7 +116,7 @@ imprimeMatriz(B)
 
 det = calculaDeterminante(U,columns)
 
-if ((len(vetorPermut)-1)%2)>0:
+if (contadorPermut%2)>0:
     det=det*(-1)
 
 print("Valor do determinante")
